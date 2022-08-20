@@ -47,7 +47,7 @@ if '__main__' == __name__:
 	)
 
 	model.compile(
-		optimizer=keras.optimizers.Adam(0.08),
+		optimizer=keras.optimizers.Adam(0.01),
 		loss='mean_squared_error'
 	)
 
@@ -56,8 +56,8 @@ if '__main__' == __name__:
 	model.fit(
 		inputs,
 		outputs,
-		batch_size=1000,
-		epochs=50
+		batch_size=5000,
+		epochs=500
 	)
 
 	r,g,b = inputs[420000]

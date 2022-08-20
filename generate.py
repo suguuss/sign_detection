@@ -8,31 +8,26 @@ import tqdm
 # HEIGHT = 300
 
 
-WIDTH  = 1280
-HEIGHT = 720
+# WIDTH  = 980
+# HEIGHT = 551
 
-input_img = Image.open("panneau.jpg")
+FILENAME = "test_image.png"
+
+input_img = Image.open(f"dataset/{FILENAME}")
 input_rgb = input_img.convert("RGB")
 
-model = tf.keras.models.load_model("model.h5")
+WIDTH, HEIGHT = input_img.size
+
+model = tf.keras.models.load_model("new_model.h5")
 
 img = Image.new("RGB", (WIDTH, HEIGHT))
-
 
 inputs = []
 
 for x in tqdm.tqdm(range(WIDTH)):
 	for y in range(HEIGHT):
 		r,g,b = np.array(input_rgb.getpixel((x,y)), dtype=float) / 255
-		
 		inputs.append([r,g,b])
-
-		# if model.predict([[r,g,b]])[0][0] > 0.5:
-		# 	out = (255,255,255)
-		# else:
-		# 	out = (0,0,0)
-		
-		# img.putpixel((x,y), out)
 
 outputs = model.predict(inputs)
 
@@ -50,4 +45,4 @@ for x in tqdm.tqdm(range(WIDTH)):
 		img.putpixel((x,y), out)
 
 
-img.save("output_full.png")
+img.save(f"out_{FILENAME}")
