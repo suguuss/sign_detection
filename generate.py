@@ -11,7 +11,7 @@ import tqdm
 # WIDTH  = 980
 # HEIGHT = 551
 
-FILENAME = "test_image.png"
+FILENAME = "test_image2.png"
 
 input_img = Image.open(f"dataset/{FILENAME}")
 input_rgb = input_img.convert("RGB")
@@ -37,10 +37,16 @@ print(f"len should be {HEIGHT*WIDTH}")
 for x in tqdm.tqdm(range(WIDTH)):
 	for y in range(HEIGHT):
 
+		# if outputs[x*HEIGHT+y] > 0.5:
+		# 	out = (255,255,255)
+		# else:
+		# 	out = (0,0,0)
+
+
 		if outputs[x*HEIGHT+y] > 0.5:
-			out = (255,255,255)
+			out = (255,0,0)
 		else:
-			out = (0,0,0)
+			out = input_rgb.getpixel((x,y))
 
 		img.putpixel((x,y), out)
 
