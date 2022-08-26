@@ -11,7 +11,7 @@ import tqdm
 # WIDTH  = 980
 # HEIGHT = 551
 
-FILENAME = "test_image2.png"
+FILENAME = "panneau2.jpg"
 
 input_img = Image.open(f"dataset/{FILENAME}")
 input_rgb = input_img.convert("RGB")
@@ -43,7 +43,7 @@ for x in tqdm.tqdm(range(WIDTH)):
 		# 	out = (0,0,0)
 
 
-		if outputs[x*HEIGHT+y] > 0.5:
+		if outputs[x*HEIGHT+y] > 0.90:
 			out = (255,0,0)
 		else:
 			out = input_rgb.getpixel((x,y))
